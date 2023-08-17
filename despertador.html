@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>  
+<head>
+  <title>Despertador</title>
+  <link href="despertador.css">
+</head>
+<body>
+
+<h2>Despertador</h2>
+
+<label for="alarmTime">Hora do despertar:</label>
+<input type="time" id="alarmTime" required>
+
+<button id="setAlarm">Definir Alarme</button>
+<button id="stopAlarm" disabled>Parar Alarme</button>
+
+<script>
+  // declarações de variáveis constantes //
+const setAlarmButton = document.getElementById('setAlarm');
+const stopAlarmButton = document.getElementById('stopAlarm');
+const alarmTimeInput = document.getElementById('alarmTime');
+let alarmInterval; // Declaração de variável tipo let para armazenar o intervalo do alarme
+
+// adiciona um ouvinte de evento ao botão Definir Alarme e adiciona a resposta do usuário a função de tipo Arrow // 
+setAlarmButton.addEventListener('click', () => {
+  // marca a hora para despertar //
+  const alarmTime = new Date();
+  // divide a hora em minutos //
+  const [hour, minute] = alarmTimeInput.value.split(':');
+  // define as horas e minustos do despertador //
+  alarmTime.setHours(parseInt(hour));
+  alarmTime.setMinutes(parseInt(minute));
+  alarmTime.setSeconds(0);
+// obtem a hora atual do computador //
+  const currentTime = new Date();
+  // calcula o tempo que levara pra despertar //
+  const timeUntilAlarm = alarmTime - currentTime;
+// verifica se o usario definiu um tempo valido //
+  if (timeUntilAlarm > 0) {
+    setAlarmButton.disabled = true; // desabilita a funçao de Definir Alarme para que o usuário não registre múltiplos alarmes
+    alarmInterval = setTimeout(() => { // define um intervalo de tempo para acionar o alarme quando o tempo restante acaba
+      playAlarm(); // liga o alarme no tempo definido
+    }, timeUntilAlarm);
+  } else {
+    alert("A hora do alarme deve ser definida para o futuro."); // exibe o alerta do despertador
+  }
+});
+// define o botão de parar o alarme
+stopAlarmButton.addEventListener('click', () => {
+  stopAlarm();
+});
+
+function playAlarm() {
+  stopAlarmButton.disabled = false;
+  document.body.style.backgroundColor = 'red'; // altera a cor de fundo para indicar que o alarme está tocando
+  alert("Acorda!!!"); // alerta de despertar
+}
+
+function stopAlarm() {
+  clearTimeout(alarmInterval);
+  setAlarmButton.disabled = false;
+  stopAlarmButton.disabled = true;
+  document.body.style.backgroundColor = 'white'; // volta à cor de fundo normal
+}
+
+</script>
+
+</body>
+</html>
