@@ -2,7 +2,89 @@
 <html>  
 <head>
   <title>Despertador</title>
-  <link href="despertador.css">
+  <style>
+    /* Estilo para o corpo da página */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Estilo para o título */
+h2 {
+  margin-top: 20px;
+  color: #333;
+}
+
+/* Estilo para rótulos */
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Estilo para a entrada de tempo */
+input[type="time"] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Estilo para botões */
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilo para o botão "Definir Alarme" */
+#setAlarm {
+  background-color: #2196F3;
+  color: white;
+}
+
+/* Estilo para o botão "Parar Alarme" */
+#stopAlarm {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Estilo para quando o botão está desativado */
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Estilo para a área do alarme ativado */
+.alarm-active {
+  background-color: red;
+  animation: pulse 0.5s alternate infinite;
+}
+
+/* Animação para a área do alarme ativado */
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+  </style>
 </head>
 <body>
 
